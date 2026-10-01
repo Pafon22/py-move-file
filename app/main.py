@@ -14,13 +14,15 @@ def move_file(command: str) -> None:
         with open(source_path, "r") as source_file:
             content = source_file.read()
     except FileNotFoundError:
-        print("Check the origin file name.")
+        print(f"Check the origin file name, {source_path}")
 
+    if not os._exists(dest_path):
+        os.makedirs(dest_path)
 
     try:
         with open(dest_path, "w") as dest_file:
             dest_file.write(content)
     except FileExistsError:
-        print("Already exists a file with this name.")
+        print(f"Already exists a file with this name, {dest_path}")
 
     os.remove(source_path)
